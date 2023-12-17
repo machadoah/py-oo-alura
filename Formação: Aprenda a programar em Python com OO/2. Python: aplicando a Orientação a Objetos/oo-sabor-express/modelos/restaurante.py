@@ -1,23 +1,34 @@
 # definindo uma classe em Python
 class Restaurante:
-    nome = ''
-    categoria = ''
-    ativo = False
 
-restaurante_praca = Restaurante()
+    restaurantes = []
 
-# acessando atributos dos objetos!
-restaurante_praca.nome = 'Praça'
-restaurante_praca.categoria = 'Gourmet'
+    # self! semelhante ao this, referencia atual!
+    # Construtor!
+    def __init__(self, nome, categoria):
+        self.nome = nome
+        self.categoria = categoria
+        self.ativo = False
+        Restaurante.restaurantes.append(self)
+    
+    # toString
+    def __str__(self):
+        # ou seja, não será retornado o endereço de memória e sim o nome!
+        # como o toString em Java ☕
+        return f'{self.nome} | {self.categoria}'
+    
+    def listar_restaurantes():
+        for restaurante in Restaurante.restaurantes:
+            print(restaurante)
 
-restaurante_pizza = Restaurante()
+
+restaurante_praca = Restaurante('Praça', 'Gourmet')
+
+restaurante_pizza = Restaurante('Pizza Express', 'Italiana')
 
 restaurantes = [restaurante_praca, restaurante_pizza]
-# [<__main__.Restaurante object at 0x7f7f218d7f70>, <__main__.Restaurante object at 0x7f7f218d7f40>]
-# local de memória onde esta sendo armazenado os objetos!
 
-# a função dir, exibe todas as informações dos objetos!
-# a função vars, exibe todas as informações dos objetos, em dicionario!
-print(vars(restaurante_praca))
+print(restaurante_praca)
+print(vars(restaurante_pizza))
 
-
+Restaurante.listar_restaurantes()
